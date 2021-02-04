@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace VotesCalculator
 {
-    class Candidate : Person
+    public class Candidate
     {
-        private int PartyId { get; set; }
-        public Candidate(string name, string surname, int partyid) : base(name, surname)
-        {
-            PartyId = partyid;
-        }
+        [XmlElement(ElementName = "name")]
+        public string Name { get; set; }
+
+        [XmlElement(ElementName = "party")]
+        public string Party { get; set; }
+
+        public bool IsChecked { get; set; }
+        
     }
 }

@@ -164,15 +164,12 @@ namespace VotesCalculator.Models
         public static bool IsBlacklisted(string pesel)
         {
             //Connection and downloading disallowed personal id from server
-            WebClient client = new WebClient();
-            client.Headers.Add("Accept", "application/xml");
-            var xmlResult = client.DownloadString(@"http://webtask.future-processing.com:8069/blocked");
-
-            //Parsing JSON to XML
-            XDocument doc = XDocument.Parse(xmlResult);
+            XmlWebClientConnection xmlWebClient = new XmlWebClientConnection();
+            string doc = xmlWebClient.GetXmlData(@"http://webtask.future-processing.com:8069/blocked");
+            XDocument xdoc = XDocument.Parse(doc);
 
             //Searching for "pesel" markup
-            List<string> list = doc.Root.Descendants("pesel")
+            List<string> list = xdoc.Root.Descendants("pesel")
                                .Select(x => x.Value)
                                .ToList();
 

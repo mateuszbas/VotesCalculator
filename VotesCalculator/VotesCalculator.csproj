@@ -66,8 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\CandidateData.cs" />
+    <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Models\DateDifferenceCalculator.cs" />
     <Compile Include="Models\PeselValidator.cs" />
+    <Compile Include="Models\WebClientConnection.cs" />
     <Compile Include="Voter.cs">
       <DependentUpon>VotersModel.tt</DependentUpon>
     </Compile>

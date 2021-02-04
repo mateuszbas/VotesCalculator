@@ -29,7 +29,7 @@ namespace VotesCalculator
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string personalIdNumber = tbPersonalId.Text;
-
+            Voter loggedVoter = new Voter(tbFirstName.Text, tbLastName.Text, personalIdNumber);
             //Failure flags
             bool isBlacklisted = false;
             bool isUnderaged = false;
@@ -63,8 +63,8 @@ namespace VotesCalculator
                 MessageBox.Show("You have already voted!");
             else
             { 
-                VotingPage votingPage = new VotingPage();
-                this.NavigationService.Navigate(votingPage);
+                VotingPage votingPage = new VotingPage(loggedVoter);
+                NavigationService.Navigate(votingPage);
             }
 
             

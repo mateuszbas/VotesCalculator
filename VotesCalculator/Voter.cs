@@ -19,5 +19,14 @@ namespace VotesCalculator
         public string LastName { get; set; }
         public string PersonalIdNumber { get; set; }
         public string VoteInfo { get; set; }
+
+        public Voter() { }
+        public Voter(string firstName, string lastName, string personalIdNumber)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            PersonalIdNumber = personalIdNumber;
+        }
+       
     }
 }
