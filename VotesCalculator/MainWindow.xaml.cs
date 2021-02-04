@@ -23,8 +23,10 @@ namespace VotesCalculator
         public MainWindow()
         {
             InitializeComponent();
-            NavigationFrame.Navigate(new LoggingPage());
-
+            NavigationFrame.Navigate(new LoggingPage(), NavigationFrame);
+            
         }
+
+       
     }
 }

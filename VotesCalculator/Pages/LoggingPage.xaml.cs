@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using System.Xml.Linq;
 using VotesCalculator.Models;
+using VotesCalculator.Views;
 
 namespace VotesCalculator
 {
@@ -39,6 +41,12 @@ namespace VotesCalculator
                 isIncorrect = PESELValidator.PESEL(personalIdNumber);
                 isBlacklisted = PESELValidator.IsBlacklisted(personalIdNumber);
                 isUnderaged = PESELValidator.IsUnderaged(personalIdNumber);
+
+                VotingDatabaseEntities db = new VotingDatabaseEntities();
+                var voters = db.Voters;
+                var result = voters.Where(x => x.PersonalIdNumber == personalIdNumber).Count();
+                if (result != 0)
+                    hasVoted = true;
             }
             catch
             {
@@ -54,19 +62,14 @@ namespace VotesCalculator
             else if (hasVoted)
                 MessageBox.Show("You have already voted!");
             else
-            {
-                //Logowanie do bazy
-
+            { 
+                VotingPage votingPage = new VotingPage();
+                this.NavigationService.Navigate(votingPage);
             }
-                
 
-
-
-
+            
         }
 
-
-
-
+      
     }
 }

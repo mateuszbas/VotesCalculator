@@ -18,6 +18,16 @@ namespace VotesCalculator.Views
     /// </summary>
     public partial class VotingPage : Page
     {
+        public void Method()
+        {
+            //Voter voter = new Voter();
+            //voter.FirstName = tbFirstName.Text;
+            //voter.LastName = tbLastName.Text;
+            //voter.PersonalIdNumber = tbPersonalId.Text;
+            //voter.VoteInfo = "BLA";
+            //db.Voters.Add(voter);
+            //db.SaveChanges();
+        }
         public VotingPage()
         {
             InitializeComponent();
