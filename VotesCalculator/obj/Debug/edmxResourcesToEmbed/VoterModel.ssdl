@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VotersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Voters.dbo.Voters' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Voters">
+    <Key>
+      <PropertyRef Name="VoterId" />
+    </Key>
+    <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+    <Property Name="PersonalIdNumber" Type="nvarchar" MaxLength="11" />
+  </EntityType>
+  <EntityContainer Name="VotersModelStoreContainer">
+    <EntitySet Name="Voters" EntityType="Self.Voters" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Voters].[VoterId] AS [VoterId], 
+    [Voters].[FirstName] AS [FirstName], 
+    [Voters].[LastName] AS [LastName], 
+    [Voters].[PersonalIdNumber] AS [PersonalIdNumber]
+    FROM [dbo].[Voters] AS [Voters]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
