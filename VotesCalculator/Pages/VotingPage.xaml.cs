@@ -56,9 +56,15 @@ namespace VotesCalculator.Views
                 VotingDatabaseEntities db = new VotingDatabaseEntities();
 
                 if (checkedCandidatesList.Count == 1)
-                    LoggedVoter.VoteInfo = checkedCandidatesList[0].Name + " " + checkedCandidatesList[0].Party;
+                {
+                    LoggedVoter.VoteName = checkedCandidatesList[0].Name;
+                    LoggedVoter.VoteParty = checkedCandidatesList[0].Party;
+                }
                 else
-                    LoggedVoter.VoteInfo = "null";
+                {
+                    LoggedVoter.VoteName = "null";
+                    LoggedVoter.VoteParty = "null";
+                }
 
                 db.Voters.Add(LoggedVoter);
                 db.SaveChanges();

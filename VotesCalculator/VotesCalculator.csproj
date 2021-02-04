@@ -112,10 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Candidate.cs" />
-    <Compile Include="Models\ICandidate.cs" />
-    <Compile Include="Models\IVote.cs" />
-    <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Voter.cs" />
     <Compile Include="Pages\LoggingPage.xaml.cs">
       <DependentUpon>LoggingPage.xaml</DependentUpon>
     </Compile>

@@ -14,11 +14,12 @@ namespace VotesCalculator
     
     public partial class Voter
     {
-        public int VoterId { get; set; }
+        public int VoteId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PersonalIdNumber { get; set; }
-        public string VoteInfo { get; set; }
+        public string VoteName { get; set; }
+        public string VoteParty { get; set; }
 
         public Voter() { }
         public Voter(string firstName, string lastName, string personalIdNumber)
@@ -27,6 +28,6 @@ namespace VotesCalculator
             LastName = lastName;
             PersonalIdNumber = personalIdNumber;
         }
-       
+
     }
 }
