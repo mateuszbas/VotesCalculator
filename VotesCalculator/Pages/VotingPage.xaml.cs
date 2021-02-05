@@ -21,7 +21,7 @@ using VotesCalculator.Pages;
 namespace VotesCalculator.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy VotingPage.xaml
+    /// Interaction logic for VotingPage.xaml
     /// </summary>
     public partial class VotingPage : Page
     {
@@ -34,7 +34,8 @@ namespace VotesCalculator.Views
             InitializeComponent();
 
             LoggedVoter = loggedVoter;
-            LoggedVoter.PersonalIdNumber = Encrypter.EncryptString(loggedVoter.PersonalIdNumber.ToString());
+
+            //Show list of candidates to vote for
             candidateData = new CandidateData();
             candidateData.CandidateListFromDatabase();
             lbCandidates.ItemsSource = candidateData.Candidates;
@@ -42,31 +43,46 @@ namespace VotesCalculator.Views
 
         private void btnVote_Click(object sender, RoutedEventArgs e)
         {
-
+            //Present the user with a messagebox to ensure his decision
             var mb = MessageBox.Show("Are you sure this the person you want to vote for?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (mb == MessageBoxResult.Yes)
             {
-                List<Candidate> checkedCandidatesList = candidateData.Candidates.Where(x => x.IsChecked).ToList();
-                VotingDatabaseEntities db = new VotingDatabaseEntities();
-
-                if (checkedCandidatesList.Count == 1)
+                try
                 {
-                    LoggedVoter.CandidateId = checkedCandidatesList[0].CandidateId;
+                    //If affirmative, find checked candidate 
+                    List<Candidate> checkedCandidatesList = candidateData.Candidates.Where(x => x.IsChecked).ToList();
+                    VotingDatabaseEntities db = new VotingDatabaseEntities();
+                    //Encrypt the users personal id number 
+                    LoggedVoter.PersonalIdNumber = Encrypter.EncryptString(LoggedVoter.PersonalIdNumber);
+
+                    //If single candidate was selected
+                    if (checkedCandidatesList.Count == 1)
+                        //Add which candidate was selected
+                        LoggedVoter.CandidateId = checkedCandidatesList[0].CandidateId;
+                    else
+                        LoggedVoter.CandidateId = null;
+
+                    //Update database
+                    db.Voters.Add(LoggedVoter);
+
+
+                    db.SaveChanges();
+                    //Navigate user to the summary page
+                    SummaryPage summaryPage = new SummaryPage();
+                    NavigationService.Navigate(summaryPage);
                 }
-                else
+                catch
                 {
-                    LoggedVoter.CandidateId = null;
+                    MessageBox.Show("Could not save your vote! Try again.", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                db.Voters.Add(LoggedVoter);
-                db.SaveChanges();
 
-                SummaryPage summaryPage = new SummaryPage();
-                NavigationService.Navigate(summaryPage);
+
             }
         }
 
+        //Navigate user to the main page
         private void btnMainPage_Click(object sender, RoutedEventArgs e)
         {
             LoggingPage loggingPage = new LoggingPage();

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("votersmodel.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("votersmodel.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("votingdatabasemodels.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("votingdatabasemodels.tt")]
 
 

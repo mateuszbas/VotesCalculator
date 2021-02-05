@@ -31,19 +31,21 @@ namespace VotesCalculator.Pages
         {
             InitializeComponent();
 
+            //Show statistics in Datagrids and TextBlock
             statisticsCalculator = new StatisticsCalculator();
             dgCandidatesResults.ItemsSource = statisticsCalculator.namesCounts;
             dgPartiesResults.ItemsSource = statisticsCalculator.partiesCounts;
             tbNullResults.Text = "Null votes count: " + statisticsCalculator.NullVotes;
-
         }
 
+        //Send user to the main page
         private void btnMainPage_Click(object sender, RoutedEventArgs e)
         {
             LoggingPage loggingPage = new LoggingPage();
             NavigationService.Navigate(loggingPage);
         }
 
+        //Shows bar charts 
         private void btnShowCharts_Click(object sender, RoutedEventArgs e)
         {
             ChartsWindow chartsWindow = new ChartsWindow();
@@ -51,6 +53,7 @@ namespace VotesCalculator.Pages
             chartsWindow.AddDataToCharts(statisticsCalculator.namesCounts, statisticsCalculator.partiesCounts, statisticsCalculator.NullVotes);
         }
 
+        //Exports data to CSV (..... and PDF......) file
         private void btnExport_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog exportDialog = new SaveFileDialog();

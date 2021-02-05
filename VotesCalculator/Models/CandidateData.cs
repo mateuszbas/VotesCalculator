@@ -9,6 +9,10 @@ using System.Xml.Serialization;
 
 namespace VotesCalculator.Models
 {
+    /*
+     * Class handles downloading information about candidates from url and 
+     * exporting of candidate data to the database
+     */
     [XmlTypeAttribute(AnonymousType = false)]
     public class CandidateData
     {
@@ -20,8 +24,10 @@ namespace VotesCalculator.Models
             Candidates = new List<Candidate>();
         }
 
+        //Downloads data about candidates from specified URL
         public void CandidateListFromURL(string url)
         {
+
             XmlWebClientConnection xmlWebClient = new XmlWebClientConnection();
             string doc = xmlWebClient.GetXmlData(url);
 
@@ -31,12 +37,14 @@ namespace VotesCalculator.Models
             Candidates = ((CandidateData)serializer.Deserialize(reader)).Candidates;
         }
 
+        //Downloads data about candidates from the database
         public void CandidateListFromDatabase()
         {
             VotingDatabaseEntities db = new VotingDatabaseEntities();
             Candidates = db.Candidates.Select(x => x).ToList();
         }
 
+        //Sends data about candidated to the database
         public void CandidateListToDatabase()
         {
             VotingDatabaseEntities db = new VotingDatabaseEntities();

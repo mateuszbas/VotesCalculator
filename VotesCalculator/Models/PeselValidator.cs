@@ -6,11 +6,15 @@ using System.Xml.Linq;
 
 namespace VotesCalculator.Models
 {
+    /*
+     * Class handles validation of personal id number by checking length, digits and calculating checksum
+     */
     class PESELValidator
     {
 
         //Source: https://github.com/piter0/PESEL-Validator
 
+        //Checks if personal id has 11 digits
         public static bool CheckPESELLength(string PESELNumber)
         {
             if (PESELNumber.Length != 11)
@@ -21,6 +25,7 @@ namespace VotesCalculator.Models
             return true;
         }
 
+        //Checks if personal id number is digits only
         public static bool CheckIfPESELContainsDigitsOnly(string PESELNumber)
         {
             foreach (var c in PESELNumber.Select(d => !Char.IsDigit(d)))
@@ -34,6 +39,7 @@ namespace VotesCalculator.Models
             return true;
         }
 
+        //Computes year of given personal id number based on the month and year digits
         public static int ComputePESELYear(int PESEL2DigitsYear, int PESELMonth)
         {
             if (PESELMonth > 0 && PESELMonth < 13)
@@ -59,8 +65,10 @@ namespace VotesCalculator.Models
             return 1800 + PESEL2DigitsYear;
         }
 
+        //Checks if month is correct
         public static bool CheckIfMonthIsCorrect(int PESELMonth)
         {
+            //Is dividable by 20
             if (PESELMonth % 20 == 0)
             {
                 return false;
@@ -80,6 +88,7 @@ namespace VotesCalculator.Models
             return true;
         }
 
+        //Checks if day is correct
         public static bool CheckIfDayIsCorrect(int PESELDay, int PESELMonth, int PESELYear)
         {
             if (PESELDay == 0 || PESELDay > 31)
@@ -132,6 +141,7 @@ namespace VotesCalculator.Models
             return true;
         }
 
+        //Calculates personal id number checksum
         public static int ComputePESELChecksum(List<int> PESELList)
         {
             int sum = PESELList[0] * 9 + PESELList[1] * 7 + PESELList[2] * 3 + PESELList[3] * 1 + PESELList[4] * 9 +
@@ -140,9 +150,9 @@ namespace VotesCalculator.Models
             return sum % 10;
         }
 
+        //Checks if personal id number belongs to underaged person
         public static bool IsUnderaged(string pesel)
         {
-
             int PESELMonth;
             int PESELDay;
             int PESELYear;
@@ -161,6 +171,7 @@ namespace VotesCalculator.Models
             return false;
         }
 
+        //Checks if personal id number is disallowed to vote
         public static bool IsBlacklisted(string pesel)
         {
             //Connection and downloading disallowed personal id from server
@@ -353,9 +364,9 @@ namespace VotesCalculator.Models
             }
         }
 
+        //Checks overall validty of personal id number
         public static bool PESEL(string PESELReadLine)
         {
-            //string PESELReadLine = String.Empty;
             List<int> PESELList;
             int PESELMonth;
             string PESELMonthToString;
@@ -363,12 +374,8 @@ namespace VotesCalculator.Models
             int PESELYear;
             int PESELChecksum;
 
-            //Console.WriteLine("Podaj numer PESEL:");
-            //PESELReadLine = Console.ReadLine();
-
             if (!CheckPESELLength(PESELReadLine) || !CheckIfPESELContainsDigitsOnly(PESELReadLine))
             {
-                //Console.WriteLine("Numer PESEL musi sk³adaæ siê dok³adnie z 11 cyfr!");
                 return true;
             }
 
@@ -381,38 +388,23 @@ namespace VotesCalculator.Models
 
             if (!CheckIfMonthIsCorrect(PESELMonth))
             {
-                //Console.WriteLine("Podano nieprawid³owy miesi¹c!");
                 return true;
             }
 
             if (!CheckIfDayIsCorrect(PESELDay, PESELMonth, PESELYear))
             {
-                //Console.WriteLine("Podano nieprawid³owy dzieñ!");
                 return true;
             }
 
             if (!PESELChecksum.Equals(ComputePESELChecksum(PESELList)))
             {
-                //Console.WriteLine("Podano nieprawid³owy numer PESEL - nie zgadza siê cyfra kontrolna!");
-                return true; 
+                return true;
             }
 
 
             return false;
 
-            //Console.WriteLine("Podano poprawny numer PESEL.");
-            //Console.WriteLine($"Data urodzin: {PESELDay} {PESELMonthToString} {PESELYear}");
-            //Console.WriteLine("P³eæ: {0}", PESELList[9] % 2 == 0 ? "kobieta" : "mê¿czyzna");
-            //Console.WriteLine("");
         }
-
-        //public static void Main()
-        //{
-        //    while (true)
-        //    {
-        //        PESEL();
-        //    }
-        //}
     }
 }
 

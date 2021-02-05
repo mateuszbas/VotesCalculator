@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace VotesCalculator.Models
 {
+    /*
+     * Class handles calculation of difference between dates taking into account leap years
+     */
     public class DateDifferenceCalculator
     {
 

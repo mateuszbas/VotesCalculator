@@ -25,6 +25,7 @@ namespace VotesCalculator.Pages
             InitializeComponent();
         }
 
+        // Adds information about voting results into charts
         public void AddDataToCharts(Dictionary<string, int> namesCounts, Dictionary<string, int> partiesCounts, int nullVotes)
         {
             Dictionary<string, int> nullVotesDict = new Dictionary<string, int>();

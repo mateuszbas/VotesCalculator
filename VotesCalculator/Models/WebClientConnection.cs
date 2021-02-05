@@ -8,10 +8,15 @@ using System.Xml.Linq;
 
 namespace VotesCalculator.Models
 {
+    /*
+     * Class handles connection with web server for downloading xml information
+     */
+
     class XmlWebClientConnection
     {
         private WebClient Client;
 
+        //Sets up connection
         public XmlWebClientConnection()
         {
             Client = new WebClient();
@@ -19,6 +24,7 @@ namespace VotesCalculator.Models
             Client.Encoding = Encoding.UTF8;
         }
 
+        //Downloads xml data as a string
         public string GetXmlData(string url)
         {
             string xmlResult = Client.DownloadString(url);

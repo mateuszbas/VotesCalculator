@@ -9,9 +9,13 @@ using System.Web.Security;
 
 namespace VotesCalculator.Models
 {
+    /*
+     * Class handles encryption of a string message using a set passphrase
+     */
     class Encrypter
     {
-        private static string passphrase = "WUuEKURWRdSZTvWlYRZSQxPTMSjQOrwHcgDgMmILK4Bn7U4agBqhEDhZjxW6x8JE0jeiN82ZkgU3nsT3enB2szCcRoC7e3AmqAKR";
+        //Given passphrase
+        private static string passphrase = "vAfuRMUiOcUZASSEt6deeijhgjQw4AXwZFFWezDHIvgePudIJYDIy46rSTmnFUDR";
 
         public static string EncryptString(string Message)
         {
