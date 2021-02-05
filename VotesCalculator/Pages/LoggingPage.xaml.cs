@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.Xml.Linq;
 using VotesCalculator.Models;
+using VotesCalculator.Pages;
 using VotesCalculator.Views;
 
 
@@ -24,7 +25,8 @@ namespace VotesCalculator
 
         private void btnSummary_Click(object sender, RoutedEventArgs e)
         {
-
+            SummaryPage summaryPage = new SummaryPage();
+            NavigationService.Navigate(summaryPage);
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -44,7 +46,6 @@ namespace VotesCalculator
                 isBlacklisted = PESELValidator.IsBlacklisted(personalIdNumber);
                 isUnderaged = PESELValidator.IsUnderaged(personalIdNumber);
 
-                
                 var voters = db.Voters;
                 var result = voters.Where(x => x.PersonalIdNumber == personalIdNumber).Count();
                 if (result != 0)

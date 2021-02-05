@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VotesCalculator.Models;
 
 namespace VotesCalculator.Pages
 {
@@ -24,7 +25,16 @@ namespace VotesCalculator.Pages
         {
             InitializeComponent();
 
+            StatisticsCalculator statisticsCalculator = new StatisticsCalculator();
+            lbCandidatesResults.ItemsSource = statisticsCalculator.namesCounts;
+        
+            lbPartiesResults.ItemsSource = statisticsCalculator.partiesCounts;
+        }
 
+        private void btnMainPage_Click(object sender, RoutedEventArgs e)
+        {
+            LoggingPage loggingPage = new LoggingPage();
+            NavigationService.Navigate(loggingPage);
         }
     }
 }

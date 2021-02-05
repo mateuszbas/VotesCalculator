@@ -15,12 +15,12 @@ namespace VotesCalculator
 
     public partial class Candidate
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+       
         public Candidate()
         {
             this.Voters = new HashSet<Voter>();
         }
-    
+
         public int CandidateId { get; set; }
 
         [XmlElement(ElementName = "name")]
@@ -28,8 +28,9 @@ namespace VotesCalculator
 
         [XmlElement(ElementName = "party")]
         public string Party { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+        
+        [XmlIgnore]
         public virtual ICollection<Voter> Voters { get; set; }
         public bool IsChecked { get;  set; }
     }

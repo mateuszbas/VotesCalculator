@@ -34,7 +34,8 @@ namespace VotesCalculator.Views
             InitializeComponent();
 
             LoggedVoter = loggedVoter;
-            candidateData = new CandidateData(@"http://webtask.future-processing.com:8069/candidates");
+            candidateData = new CandidateData();
+            candidateData.CandidateListFromDatabase();
             lbCandidates.ItemsSource = candidateData.Candidates;
         }
 
@@ -51,12 +52,10 @@ namespace VotesCalculator.Views
                 if (checkedCandidatesList.Count == 1)
                 {
                     LoggedVoter.CandidateId = checkedCandidatesList[0].CandidateId;
-                  
                 }
                 else
                 {
-                    LoggedVoter.CandidateId = -1;
-                   
+                    LoggedVoter.CandidateId = null;
                 }
 
                 db.Voters.Add(LoggedVoter);

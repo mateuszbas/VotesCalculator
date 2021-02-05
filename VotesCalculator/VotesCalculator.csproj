@@ -125,7 +125,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Candidate.cs" />
     <Compile Include="Pages\LoggingPage.xaml.cs">
       <DependentUpon>LoggingPage.xaml</DependentUpon>
     </Compile>

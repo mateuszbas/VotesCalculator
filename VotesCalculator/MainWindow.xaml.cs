@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VotesCalculator.Models;
 
 namespace VotesCalculator
 {
@@ -23,6 +24,10 @@ namespace VotesCalculator
         public MainWindow()
         {
             InitializeComponent();
+            //CandidateData candidateData = new CandidateData();
+            //candidateData.CandidateListFromURL(@"http://webtask.future-processing.com:8069/candidates");
+            //candidateData.CandidateListToDatabase();
+
             NavigationFrame.Navigate(new LoggingPage(), NavigationFrame);
             
         }

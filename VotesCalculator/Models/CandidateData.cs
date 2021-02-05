@@ -13,18 +13,17 @@ namespace VotesCalculator.Models
     public class CandidateData
     {
         [XmlElement("candidate")]
-
-        public List<Candidate> Candidates { get; }
+        public List<Candidate> Candidates { get; set; }
 
         public CandidateData()
         {
             Candidates = new List<Candidate>();
         }
 
-        public CandidateData(string url): base()
+        public void CandidateListFromURL(string url)
         {
             XmlWebClientConnection xmlWebClient = new XmlWebClientConnection();
-            string doc = xmlWebClient.GetXmlData(@"http://webtask.future-processing.com:8069/candidates");
+            string doc = xmlWebClient.GetXmlData(url);
 
             var serializer = new XmlSerializer(typeof(CandidateData), new XmlRootAttribute("candidates"));
             var stringReader = new StringReader(doc);
@@ -32,6 +31,19 @@ namespace VotesCalculator.Models
             Candidates = ((CandidateData)serializer.Deserialize(reader)).Candidates;
         }
 
+        public void CandidateListFromDatabase()
+        {
+            VotingDatabaseEntities db = new VotingDatabaseEntities();
+            Candidates = db.Candidates.Select(x => x).ToList();
+        }
+
+        public void CandidateListToDatabase()
+        {
+            VotingDatabaseEntities db = new VotingDatabaseEntities();
+            foreach (Candidate candidate in Candidates)
+                db.Candidates.Add(candidate);
+            db.SaveChanges();
+        }
     }
 
     

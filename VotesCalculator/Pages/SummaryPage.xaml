@@ -8,7 +8,48 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SummaryPage">
 
-    <Grid>
-        
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="267*" />
+            <ColumnDefinition Width="267" />
+            <ColumnDefinition Width="266*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.RowSpan="3" x:Name="lbCandidatesResults" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Key}" />
+                        <TextBlock Text=": " />
+                        <TextBlock Text="{Binding Value}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBlock Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" Margin="10px" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">These are the results!</TextBlock>
+
+        <Button x:Name="btnExport" Grid.Row="4" Grid.Column="1" Margin="10px"  >EXPORT</Button>
+        <Button x:Name="btnMainPage" Grid.Row="5" Grid.Column="1" Margin="10px" Click="btnMainPage_Click" >GO TO MAIN PAGE</Button>
+        <ListBox Grid.RowSpan="3" x:Name="lbPartiesResults" ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Row="1" Grid.Column="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text=" " />
+                        <TextBlock Text="{Binding Key}" />
+                        <TextBlock Text=": " />
+                        <TextBlock Text="{Binding Value}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>
