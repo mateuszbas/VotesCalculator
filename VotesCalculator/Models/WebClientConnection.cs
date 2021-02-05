@@ -21,9 +21,7 @@ namespace VotesCalculator.Models
 
         public string GetXmlData(string url)
         {
-            string xmlResult = Client.DownloadString(url); 
-            
-
+            string xmlResult = Client.DownloadString(url);
             return xmlResult;
         }
 

@@ -9,17 +9,18 @@ namespace VotesCalculator.Models
     class StatisticsCalculator
     {
         public int NullVotes { get; }
+        public int ValidVotes { get; }
         public Dictionary<string, int> namesCounts { get; }
         public Dictionary<string, int> partiesCounts { get; }
-        
+        public int DisallowedTries { get; }
 
         public StatisticsCalculator()
         {
             VotingDatabaseEntities db = new VotingDatabaseEntities();
+            DisallowedTries = db.Statistics.Select(x => x.DisallowedTries).ToArray()[0];
 
-            NullVotes = db.Voters.Where(x => x.CandidateId == null).Count();
-
-            var test = db.Candidates.Select(x => x).ToList();
+            NullVotes = db.Voters.Count(x => string.IsNullOrEmpty(x.CandidateId.ToString()));
+            ValidVotes = db.Voters.Count(x => !string.IsNullOrEmpty(x.CandidateId.ToString()));
 
             var leftOuterJoin = from v in db.Voters
                                 join c in db.Candidates 

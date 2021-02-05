@@ -27,11 +27,11 @@
           <Property Name="VoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
           <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PersonalIdNumber" Type="nvarchar" MaxLength="11" Nullable="false" />
-          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="PersonalIdNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CandidateId" Type="int" />
         </EntityType>
         <Association Name="CandidateId">
-          <End Role="Candidates" Type="Self.Candidates" Multiplicity="1" />
+          <End Role="Candidates" Type="Self.Candidates" Multiplicity="0..1" />
           <End Role="Voters" Type="Self.Voters" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Candidates">
@@ -79,12 +79,12 @@
           <Property Name="VoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PersonalIdNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="PersonalIdNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CandidateId" Type="Int32" />
           <NavigationProperty Name="Candidate" Relationship="Self.CandidateId" FromRole="Voters" ToRole="Candidates" />
         </EntityType>
         <Association Name="CandidateId">
-          <End Role="Candidates" Type="Self.Candidate" Multiplicity="1" />
+          <End Role="Candidates" Type="Self.Candidate" Multiplicity="0..1" />
           <End Role="Voters" Type="Self.Voter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Candidates">

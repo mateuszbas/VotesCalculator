@@ -15,7 +15,7 @@ namespace VotesCalculator
 
     public partial class Candidate
     {
-       
+
         public Candidate()
         {
             this.Voters = new HashSet<Voter>();
@@ -29,9 +29,9 @@ namespace VotesCalculator
         [XmlElement(ElementName = "party")]
         public string Party { get; set; }
 
-        
+
         [XmlIgnore]
         public virtual ICollection<Voter> Voters { get; set; }
-        public bool IsChecked { get;  set; }
+        public bool IsChecked { get; set; }
     }
 }

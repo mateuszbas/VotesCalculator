@@ -34,6 +34,7 @@ namespace VotesCalculator.Views
             InitializeComponent();
 
             LoggedVoter = loggedVoter;
+            LoggedVoter.PersonalIdNumber = Encrypter.EncryptString(loggedVoter.PersonalIdNumber.ToString());
             candidateData = new CandidateData();
             candidateData.CandidateListFromDatabase();
             lbCandidates.ItemsSource = candidateData.Candidates;

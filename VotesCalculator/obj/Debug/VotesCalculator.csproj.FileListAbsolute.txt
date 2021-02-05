@@ -25,3 +25,9 @@ C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\VotesCalculator_Content.g.cs
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\SummaryPage.g.cs
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\SummaryPage.baml
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.xml
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\ChartsWindow.g.cs
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\ChartsWindow.baml
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\bin\Debug\Syncfusion.Pdf.Base.dll
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\bin\Debug\Syncfusion.Pdf.Base.xml

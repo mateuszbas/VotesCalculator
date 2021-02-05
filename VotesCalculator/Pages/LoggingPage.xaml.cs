@@ -34,6 +34,7 @@ namespace VotesCalculator
             VotingDatabaseEntities db = new VotingDatabaseEntities();
             string personalIdNumber = tbPersonalId.Text;
             Voter loggedVoter = new Voter(tbFirstName.Text, tbLastName.Text, personalIdNumber);
+
             //Failure flags
             bool isBlacklisted = false;
             bool isUnderaged = false;
@@ -47,9 +48,19 @@ namespace VotesCalculator
                 isUnderaged = PESELValidator.IsUnderaged(personalIdNumber);
 
                 var voters = db.Voters;
-                var result = voters.Where(x => x.PersonalIdNumber == personalIdNumber).Count();
-                if (result != 0)
-                    hasVoted = true;
+
+                var result = voters.Select(x => x.PersonalIdNumber).ToList();
+                
+                foreach(string voterId in result)
+                {
+                   if(Encrypter.DecryptString(voterId) == personalIdNumber)
+                    {
+                        hasVoted = true;
+                        break;
+                    }
+                }
+
+             
             }
             catch
             {
@@ -58,13 +69,14 @@ namespace VotesCalculator
 
             if (isIncorrect)
                 MessageBox.Show("Personal ID number is incorrect!");
-            else if (isUnderaged || isBlacklisted) {
+            else if (isUnderaged || isBlacklisted)
+            {
                 var statisticsTable = db.Statistics;
                 var disallowedTries = statisticsTable.SingleOrDefault(x => x.StatisticId == 1);
                 disallowedTries.DisallowedTries++;
                 db.SaveChanges();
                 MessageBox.Show("You are disallowed to vote!");
-           
+
             }
             else if (hasVoted)
                 MessageBox.Show("You have already voted!");
@@ -74,10 +86,7 @@ namespace VotesCalculator
                 NavigationService.Navigate(votingPage);
             }
 
-
-
         }
-
 
     }
 }
