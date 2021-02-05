@@ -25,6 +25,8 @@ namespace VotesCalculator
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Candidate> Candidates { get; set; }
+        public virtual DbSet<Statistic> Statistics { get; set; }
         public virtual DbSet<Voter> Voters { get; set; }
     }
 }

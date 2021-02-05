@@ -16,6 +16,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using VotesCalculator.Models;
+using VotesCalculator.Pages;
 
 namespace VotesCalculator.Views
 {
@@ -24,25 +25,17 @@ namespace VotesCalculator.Views
     /// </summary>
     public partial class VotingPage : Page
     {
-        private Voter LoggedVoter { get; set; }
-        private List<Candidate> candidatesList { get; set; }
+        public Voter LoggedVoter { get; }
+
+        private CandidateData candidateData;
 
         public VotingPage(Voter loggedVoter)
         {
             InitializeComponent();
 
             LoggedVoter = loggedVoter;
-
-            XmlWebClientConnection xmlWebClient = new XmlWebClientConnection();
-            string doc = xmlWebClient.GetXmlData(@"http://webtask.future-processing.com:8069/candidates");
-
-            var serializer = new XmlSerializer(typeof(CandidateData), new XmlRootAttribute("candidates"));
-            var stringReader = new StringReader(doc);
-            var reader = XmlReader.Create(stringReader);
-            var result = (CandidateData)serializer.Deserialize(reader);
-
-            candidatesList = result.Candidates;
-            lbCandidates.ItemsSource = candidatesList;
+            candidateData = new CandidateData(@"http://webtask.future-processing.com:8069/candidates");
+            lbCandidates.ItemsSource = candidateData.Candidates;
         }
 
         private void btnVote_Click(object sender, RoutedEventArgs e)
@@ -52,22 +45,25 @@ namespace VotesCalculator.Views
 
             if (mb == MessageBoxResult.Yes)
             {
-                List<Candidate> checkedCandidatesList = candidatesList.Where(x => x.IsChecked).ToList();
+                List<Candidate> checkedCandidatesList = candidateData.Candidates.Where(x => x.IsChecked).ToList();
                 VotingDatabaseEntities db = new VotingDatabaseEntities();
 
                 if (checkedCandidatesList.Count == 1)
                 {
-                    LoggedVoter.VoteName = checkedCandidatesList[0].Name;
-                    LoggedVoter.VoteParty = checkedCandidatesList[0].Party;
+                    LoggedVoter.CandidateId = checkedCandidatesList[0].CandidateId;
+                  
                 }
                 else
                 {
-                    LoggedVoter.VoteName = "null";
-                    LoggedVoter.VoteParty = "null";
+                    LoggedVoter.CandidateId = -1;
+                   
                 }
 
                 db.Voters.Add(LoggedVoter);
                 db.SaveChanges();
+
+                SummaryPage summaryPage = new SummaryPage();
+                NavigationService.Navigate(summaryPage);
             }
         }
 

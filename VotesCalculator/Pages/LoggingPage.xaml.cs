@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using VotesCalculator.Models;
 using VotesCalculator.Views;
 
+
 namespace VotesCalculator
 {
     /// <summary>
@@ -28,6 +29,7 @@ namespace VotesCalculator
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            VotingDatabaseEntities db = new VotingDatabaseEntities();
             string personalIdNumber = tbPersonalId.Text;
             Voter loggedVoter = new Voter(tbFirstName.Text, tbLastName.Text, personalIdNumber);
             //Failure flags
@@ -42,7 +44,7 @@ namespace VotesCalculator
                 isBlacklisted = PESELValidator.IsBlacklisted(personalIdNumber);
                 isUnderaged = PESELValidator.IsUnderaged(personalIdNumber);
 
-                VotingDatabaseEntities db = new VotingDatabaseEntities();
+                
                 var voters = db.Voters;
                 var result = voters.Where(x => x.PersonalIdNumber == personalIdNumber).Count();
                 if (result != 0)
@@ -53,23 +55,28 @@ namespace VotesCalculator
                 isIncorrect = true;
             }
 
-            if (isIncorrect) 
+            if (isIncorrect)
                 MessageBox.Show("Personal ID number is incorrect!");
-            else if (isUnderaged)
-                MessageBox.Show("You are not old enough to vote!");
-            else if (isBlacklisted)
-                MessageBox.Show("Your personal ID number is blacklisted!");
+            else if (isUnderaged || isBlacklisted) {
+                var statisticsTable = db.Statistics;
+                var disallowedTries = statisticsTable.SingleOrDefault(x => x.StatisticId == 1);
+                disallowedTries.DisallowedTries++;
+                db.SaveChanges();
+                MessageBox.Show("You are disallowed to vote!");
+           
+            }
             else if (hasVoted)
                 MessageBox.Show("You have already voted!");
             else
-            { 
+            {
                 VotingPage votingPage = new VotingPage(loggedVoter);
                 NavigationService.Navigate(votingPage);
             }
 
-            
+
+
         }
 
-      
+
     }
 }

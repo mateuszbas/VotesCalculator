@@ -66,28 +66,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Candidate.cs">
+      <DependentUpon>VotingDatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CandidateData.cs" />
     <Compile Include="Models\DatabaseConnection.cs" />
     <Compile Include="Models\DateDifferenceCalculator.cs" />
     <Compile Include="Models\PeselValidator.cs" />
+    <Compile Include="Models\StatisticsCalculator.cs" />
     <Compile Include="Models\WebClientConnection.cs" />
+    <Compile Include="Pages\SummaryPage.xaml.cs">
+      <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Statistic.cs">
+      <DependentUpon>VotingDatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="Voter.cs">
-      <DependentUpon>VotersModel.tt</DependentUpon>
+      <DependentUpon>VotingDatabaseModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="VotersModel.Context.cs">
+    <Compile Include="VotingDatabaseModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VotersModel.Context.tt</DependentUpon>
+      <DependentUpon>VotingDatabaseModels.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="VotersModel.cs">
+    <Compile Include="VotingDatabaseModels.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VotersModel.tt</DependentUpon>
+      <DependentUpon>VotingDatabaseModels.tt</DependentUpon>
     </Compile>
-    <Compile Include="VotersModel.Designer.cs">
+    <Compile Include="VotingDatabaseModels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>VotersModel.edmx</DependentUpon>
+      <DependentUpon>VotingDatabaseModels.edmx</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +114,10 @@
     <Page Include="Pages\LoggingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\VotingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -140,12 +154,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EntityDeploy Include="VotersModel.edmx">
+    <EntityDeploy Include="VotingDatabaseModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VotersModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>VotingDatabaseModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="VotersModel.edmx.diagram">
-      <DependentUpon>VotersModel.edmx</DependentUpon>
+    <None Include="VotingDatabaseModels.edmx.diagram">
+      <DependentUpon>VotingDatabaseModels.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -155,15 +169,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="VotersModel.Context.tt">
+    <Content Include="VotingDatabaseModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VotersModel.edmx</DependentUpon>
-      <LastGenOutput>VotersModel.Context.cs</LastGenOutput>
+      <DependentUpon>VotingDatabaseModels.edmx</DependentUpon>
+      <LastGenOutput>VotingDatabaseModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="VotersModel.tt">
+    <Content Include="VotingDatabaseModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VotersModel.edmx</DependentUpon>
-      <LastGenOutput>VotersModel.cs</LastGenOutput>
+      <DependentUpon>VotingDatabaseModels.edmx</DependentUpon>
+      <LastGenOutput>VotingDatabaseModels.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -23,3 +23,5 @@ C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\VotesCalculator.exe
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\VotesCalculator.pdb
 C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\VotesCalculator_Content.g.cs
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\SummaryPage.g.cs
+C:\Users\mati9\Documents\nowa_praca\Zadanie\VotesCalculator\VotesCalculator\obj\Debug\Pages\SummaryPage.baml

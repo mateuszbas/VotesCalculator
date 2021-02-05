@@ -10,7 +10,7 @@ namespace VotesCalculator.Models
 {
     class XmlWebClientConnection
     {
-        public WebClient Client { get; set; }
+        private WebClient Client;
 
         public XmlWebClientConnection()
         {

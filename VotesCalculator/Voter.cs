@@ -18,8 +18,9 @@ namespace VotesCalculator
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PersonalIdNumber { get; set; }
-        public string VoteName { get; set; }
-        public string VoteParty { get; set; }
+        public int CandidateId { get; set; }
+    
+        public virtual Candidate Candidate { get; set; }
 
         public Voter() { }
         public Voter(string firstName, string lastName, string personalIdNumber)
